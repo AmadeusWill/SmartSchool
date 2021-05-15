@@ -29,6 +29,8 @@ import com.smartschool.databinding.ActivityMainBinding;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.HashMap;
+
 public class MainActivity extends BaseActivity {
 
     private ActivityMainBinding binding;
@@ -76,9 +78,16 @@ public class MainActivity extends BaseActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull @NotNull MenuItem item) {
                 switch (item.getItemId()){
+                    case R.id.nav_quit:
+                        LoginActivity.loginSuccess=false;
+                        enterImg.setVisibility(View.VISIBLE);
+                        Cookies=new HashMap<>();
+                        drawerLayout.close();
+                        break;
                     case R.id.nav_exit:
                         finish();
                         break;
+                    default:break;
                 }
                 return true;
             }

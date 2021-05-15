@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">SmartSchool</string>
+    <string name="title_home">主页</string>
+    <string name="title_dashboard">功能</string>
+    <string name="title_notifications">信息</string>
+    <string name="exit">退出</string>
+    <string name="news1">视点新闻</string>
+    <string name="news2">学术聚焦</string>
+</resources>

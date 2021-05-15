@@ -16,6 +16,9 @@ import com.smartschool.R;
 import com.smartschool.adapter.NewsAdapter;
 import com.smartschool.bean.NewsDataBean;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -24,6 +27,7 @@ import org.jsoup.select.Elements;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class MsgActivity extends BaseActivity {
@@ -56,26 +60,40 @@ public class MsgActivity extends BaseActivity {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                Connection connection= Jsoup.connect("http://jwxt.cumt.edu.cn/jwglxt/xtgl/index_cxAreaThree.html?localeKey=zh_CN&gnmkdm=index&su="+BaseActivity.userId);
+                Connection connection= Jsoup.connect("http://jwxt.cumt.edu.cn/jwglxt/xtgl/index_cxDbsy.html?doType=query");
                 connection.header("User-Agent","Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.93 Safari/537.36 Edg/90.0.818.56");
+                connection.header("Content-Type","application/x-www-form-urlencoded;charset=UTF-8");
+                connection.data("sfyy","1")
+                        .data("flag","1")
+                        .data("_search","false")
+                        .data("nd",Integer.toString(new Date().getDate()))
+                        .data("queryModel.showCount","30")
+                        .data("queryModel.currentPage","1")
+                        .data("queryModel.sortName","cjsj")
+                        .data("queryModel.sortOrder","desc")
+                        .data("time","1");
                 Connection.Response response =null;
                 try{
-                    response = connection.cookies(BaseActivity.Cookies).ignoreContentType(false).followRedirects(true).execute();
+                    response = connection.cookies(BaseActivity.Cookies).ignoreContentType(true).followRedirects(true).method(Connection.Method.POST).execute();
                 }    catch (IOException e){
                     e.printStackTrace();
                 }
-                Document document=Jsoup.parse(response.body());
-                Elements elements=document.select("#home a");
-                for(int i=0;i<elements.size()&&i<7;i++){
-                    Element element=elements.get(i);
-                    String title=element.select(".title").text();
-                    String url=element.select(".title").attr("title");
-                    String time=element.select(".fraction").text();
-                    NewsDataBean newsDataBean=new NewsDataBean();
-                    newsDataBean.setTitle(title);
-                    newsDataBean.setTime(time);
-                    newsDataBean.setUrl(url);
-                    msgList.add(newsDataBean);
+                try {
+                    JSONObject jsonObject=new JSONObject(response.body());
+                    JSONArray jsonArray=jsonObject.getJSONArray("items");
+                    for(int i=0;i<jsonArray.length();i++){
+                        jsonObject=jsonArray.getJSONObject(i);
+                        final String title=jsonObject.getString("xxbtjc");
+                        final String time=jsonObject.getString("cjsj");
+                        final String url=jsonObject.getString("xxbt");
+                        NewsDataBean newsDataBean=new NewsDataBean();
+                        newsDataBean.setTitle(title);
+                        newsDataBean.setTime(time);
+                        newsDataBean.setUrl(url);
+                        msgList.add(newsDataBean);
+                    }
+                }catch (JSONException e){
+                    e.printStackTrace();
                 }
                 initMsgRecycler();
             }

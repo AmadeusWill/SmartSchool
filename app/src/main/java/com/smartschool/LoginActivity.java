@@ -9,8 +9,11 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 
@@ -52,6 +55,17 @@ public class LoginActivity extends BaseActivity {
         nameEt=(EditText) findViewById(R.id.name_et);
         pwdEt=(EditText) findViewById(R.id.pwd_et);
         codeEt=(EditText) findViewById(R.id.code_et);
+        CheckBox displayPwd=(CheckBox) findViewById(R.id.display_pwd);
+        displayPwd.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    pwdEt.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+                }else {
+                    pwdEt.setInputType(InputType.TYPE_CLASS_TEXT|InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                }
+            }
+        });
 
         View view=(View) findViewById(R.id.tb);
         Toolbar toolbar=(Toolbar) view.findViewById(R.id.toolbar);

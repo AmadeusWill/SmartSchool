@@ -1,6 +1,8 @@
 package com.smartschool.adapter;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -85,8 +87,23 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder>{
                 });
                 break;
             case 2:
-                final String msgContent=newsList.get(position).getUrl();
-                System.out.println(msgContent);
+                holder.newsView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        final String msgContent=newsList.get(position).getUrl();
+                        System.out.println(msgContent);
+                        final AlertDialog.Builder builder=new AlertDialog.Builder(context);
+                        builder.setTitle("详细信息");
+                        builder.setMessage(msgContent);
+                        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        });
+                        builder.create().show();
+                    }
+                });
                 break;
             default:break;
         }

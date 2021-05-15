@@ -82,6 +82,9 @@ public class MainActivity extends BaseActivity {
                         LoginActivity.loginSuccess=false;
                         enterImg.setVisibility(View.VISIBLE);
                         Cookies=new HashMap<>();
+                        BaseActivity.username="新用户";
+                        BaseActivity.userClass="";
+                        BaseActivity.userId="";
                         drawerLayout.close();
                         break;
                     case R.id.nav_exit:

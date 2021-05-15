@@ -1,10 +1,13 @@
 package com.smartschool;
 
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -44,6 +47,7 @@ public class LoginActivity extends BaseActivity {
     EditText pwdEt;
     EditText codeEt;
     final String baseUrl="http://holer50743.restclient.cn/crawler_server_war_exploded/";
+    ProgressDialog waitingDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,6 +91,7 @@ public class LoginActivity extends BaseActivity {
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                initWaiting();
                 final String name=nameEt.getText().toString();
                 final String pwd=pwdEt.getText().toString();
                 final String code=codeEt.getText().toString();
@@ -100,11 +105,13 @@ public class LoginActivity extends BaseActivity {
                 HttpUtil.sendOkHttpRequest(loginUrl, new Callback() {
                     @Override
                     public void onFailure(Call call, IOException e) {
+                        waitingDialog.dismiss();
                         if(e instanceof SocketTimeoutException){
-
-                        }
-                        if(e instanceof ConnectException){
-
+                            initDialog("连接超时，请重试！");
+                        } else if(e instanceof ConnectException){
+                            initDialog("连接出错，请检查网络并重试！");
+                        }else {
+                            initDialog("失败，请重试！");
                         }
                     }
 
@@ -145,20 +152,26 @@ public class LoginActivity extends BaseActivity {
                 Document document =Jsoup.parse(response.body());
                 System.out.println("学生信息：");
                 Element element=document.select("#col_xm p").first();
-                username=element.text();
+                if(element==null||element.text().length()<=0){
+                    waitingDialog.dismiss();
+                    initDialog("数据请求错误，请重试！");
+                }else {
+                    username=element.text();
 
-                element=document.select("#col_xbm p").first();
+                    element=document.select("#col_xbm p").first();
 
-                element=document.select("#col_njdm_id p").first();
+                    element=document.select("#col_njdm_id p").first();
 
-                element=document.select("#col_jg_id p").first();
+                    element=document.select("#col_jg_id p").first();
 
-                element=document.select("#col_zyh_id p").first();
+                    element=document.select("#col_zyh_id p").first();
 
-                element=document.select("#col_bh_id p").first();
-                userClass=element.text();
-                loginSuccess=true;
-                finish();
+                    element=document.select("#col_bh_id p").first();
+                    userClass=element.text();
+                    waitingDialog.dismiss();
+                    loginSuccess=true;
+                    finish();
+                }
             }
         }).start();
     }
@@ -169,10 +182,11 @@ public class LoginActivity extends BaseActivity {
             @Override
             public void onFailure(Call call, IOException e) {
                 if(e instanceof SocketTimeoutException){
-
-                }
-                if(e instanceof ConnectException){
-
+                    initDialog("连接超时，请重试！");
+                } else if(e instanceof ConnectException){
+                    initDialog("连接出错，请检查网络并重试！");
+                }else {
+                    initDialog("失败，请重试！");
                 }
             }
 
@@ -189,6 +203,28 @@ public class LoginActivity extends BaseActivity {
                 });
             }
         });
+    }
+
+    private void initDialog(String msg){
+        AlertDialog.Builder builder=new AlertDialog.Builder(LoginActivity.this);
+        builder.setTitle("访问失败！");
+        builder.setMessage(msg);
+        builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                finish();
+            }
+        });
+        builder.create().show();
+    }
+
+    private void initWaiting(){
+        waitingDialog=new ProgressDialog(LoginActivity.this);
+        waitingDialog.setTitle("登陆中");
+        waitingDialog.setMessage("请等待……");
+        waitingDialog.setCancelable(false);
+        waitingDialog.show();
     }
 
     public static void actionStart(Context context){

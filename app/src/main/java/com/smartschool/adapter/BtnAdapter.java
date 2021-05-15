@@ -1,6 +1,8 @@
 package com.smartschool.adapter;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 
@@ -15,6 +17,7 @@ import com.smartschool.LoginActivity;
 import com.smartschool.R;
 import com.smartschool.bean.BtnDataBean;
 import com.smartschool.ui.dashboard.MsgActivity;
+import com.smartschool.ui.dashboard.RoomActivity;
 import com.smartschool.ui.dashboard.SelectActivity;
 
 import org.jetbrains.annotations.NotNull;
@@ -55,8 +58,24 @@ public class BtnAdapter extends RecyclerView.Adapter<BtnAdapter.ViewHolder>{
                         case 2:
                             MsgActivity.actionStart(context);
                             break;
+                        case 3:
+                            break;
+                        case 4:
+                            RoomActivity.actionStart(context);
+                            break;
                         default:break;
                     }
+                }else {
+                    final AlertDialog.Builder builder=new AlertDialog.Builder(context);
+                    builder.setTitle("查询失败");
+                    builder.setMessage("请先登陆您的账户！");
+                    builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+                    builder.create().show();
                 }
             }
         });

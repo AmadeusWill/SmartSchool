@@ -16,7 +16,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SmartSchool"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.dashboard.MsgActivity"></activity>
+        <activity android:name=".ui.dashboard.RoomActivity"></activity>
+        <activity android:name=".ui.dashboard.MsgActivity" />
         <activity android:name=".ui.dashboard.SelectActivity" />
         <activity android:name=".ui.notifications.NewsInfoActivity" />
         <activity android:name=".ui.notifications.NewsActivity" />

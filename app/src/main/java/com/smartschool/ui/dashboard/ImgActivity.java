@@ -17,7 +17,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
-import com.bumptech.glide.Glide;
 import com.smartschool.BaseActivity;
 import com.smartschool.MainActivity;
 import com.smartschool.R;
@@ -52,9 +51,11 @@ public class ImgActivity extends BaseActivity {
 
         imageView=(ImageView) findViewById(R.id.img_iv);
         if(type==0){
-            Glide.with(this).load(R.mipmap.bus).into(imageView);
+            imageView.setImageResource(R.mipmap.bus);
+//            Glide.with(this).load(R.mipmap.bus).into(imageView);
         }else {
-            Glide.with(this).load(R.mipmap.calendar).into(imageView);
+            imageView.setImageResource(R.mipmap.calendar);
+//            Glide.with(this).load(R.mipmap.calendar).into(imageView);
         }
         init();
         imageView.setOnClickListener(new View.OnClickListener() {
@@ -95,16 +96,18 @@ public class ImgActivity extends BaseActivity {
 
     private ImageView getImageView(){
         ImageView iv=new ImageView(this);
-        iv.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT));
+        iv.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.MATCH_PARENT));
         iv.setPadding(20,20,20,20);
-        InputStream is;
+//        InputStream is;
         if(type==0){
-            is=getResources().openRawResource(R.raw.bus_raw);
+//            is=getResources().openRawResource(R.raw.bus_raw);
+            iv.setImageResource(R.mipmap.bus);
         }else {
-            is=getResources().openRawResource(R.raw.calendar_raw);
+//            is=getResources().openRawResource(R.raw.calendar_raw);
+            iv.setImageResource(R.mipmap.calendar);
         }
-        Drawable drawable= BitmapDrawable.createFromStream(is,null);
-        iv.setImageDrawable(drawable);
+//        Drawable drawable= BitmapDrawable.createFromStream(is,null);
+//        iv.setImageDrawable(drawable);
         return iv;
     }
 

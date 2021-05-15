@@ -48,22 +48,8 @@ public class BtnAdapter extends RecyclerView.Adapter<BtnAdapter.ViewHolder>{
         holder.btnView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(LoginActivity.loginSuccess){
+                if(position==5||position==6){
                     switch (position){
-                        case 0:
-                            SelectActivity.actionStart(context,position);
-                            break;
-                        case 1:
-                            SelectActivity.actionStart(context,position);
-                            break;
-                        case 2:
-                            MsgActivity.actionStart(context);
-                            break;
-                        case 3:
-                            break;
-                        case 4:
-                            RoomActivity.actionStart(context);
-                            break;
                         case 5:
                             ImgActivity.actionStart(context,0);
                             break;
@@ -73,16 +59,36 @@ public class BtnAdapter extends RecyclerView.Adapter<BtnAdapter.ViewHolder>{
                         default:break;
                     }
                 }else {
-                    final AlertDialog.Builder builder=new AlertDialog.Builder(context);
-                    builder.setTitle("查询失败");
-                    builder.setMessage("请先登陆您的账户！");
-                    builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
+                    if(LoginActivity.loginSuccess){
+                        switch (position){
+                            case 0:
+                                SelectActivity.actionStart(context,position);
+                                break;
+                            case 1:
+                                SelectActivity.actionStart(context,position);
+                                break;
+                            case 2:
+                                MsgActivity.actionStart(context);
+                                break;
+                            case 3:
+                                break;
+                            case 4:
+                                RoomActivity.actionStart(context);
+                                break;
+                            default:break;
                         }
-                    });
-                    builder.create().show();
+                    }else {
+                        final AlertDialog.Builder builder=new AlertDialog.Builder(context);
+                        builder.setTitle("查询失败");
+                        builder.setMessage("请先登陆您的账户！");
+                        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        });
+                        builder.create().show();
+                    }
                 }
             }
         });

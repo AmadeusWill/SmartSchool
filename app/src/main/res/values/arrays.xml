@@ -59,4 +59,8 @@
         <item>中午</item>
         <item>傍晚</item>
     </string-array>
+    <string-array name="array7">
+        <item>未评价</item>
+        <item>已评价</item>
+    </string-array>
 </resources>

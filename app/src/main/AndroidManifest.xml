@@ -16,7 +16,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SmartSchool"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.dashboard.EvaluationActivity"></activity>
+        <activity android:name=".ui.dashboard.EvaluationInfoActivity"></activity>
+        <activity android:name=".ui.dashboard.EvaluationActivity" />
         <activity android:name=".ui.dashboard.ImgActivity" />
         <activity android:name=".ui.dashboard.RoomActivity" />
         <activity android:name=".ui.dashboard.MsgActivity" />

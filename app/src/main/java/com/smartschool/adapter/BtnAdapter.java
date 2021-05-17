@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.smartschool.LoginActivity;
 import com.smartschool.R;
 import com.smartschool.bean.BtnDataBean;
+import com.smartschool.ui.dashboard.EvaluationActivity;
 import com.smartschool.ui.dashboard.ImgActivity;
 import com.smartschool.ui.dashboard.MsgActivity;
 import com.smartschool.ui.dashboard.RoomActivity;
@@ -71,6 +72,7 @@ public class BtnAdapter extends RecyclerView.Adapter<BtnAdapter.ViewHolder>{
                                 MsgActivity.actionStart(context);
                                 break;
                             case 3:
+                                EvaluationActivity.actionStart(context);
                                 break;
                             case 4:
                                 RoomActivity.actionStart(context);

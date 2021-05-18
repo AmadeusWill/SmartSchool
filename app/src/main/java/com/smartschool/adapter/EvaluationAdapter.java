@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.smartschool.R;
 import com.smartschool.bean.EvaluationDataBean;
+import com.smartschool.ui.dashboard.EvaluationInfoActivity;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -37,12 +38,22 @@ public class EvaluationAdapter extends RecyclerView.Adapter<EvaluationAdapter.Vi
         holder.evaluationView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                final String jxb_id=evaluationList.get(position).getJxb_id();
+                final String kch_id=evaluationList.get(position).getKch_id();
+                final String xsdm=evaluationList.get(position).getXsdm();
+                final String jgh_id=evaluationList.get(position).getJgh_id();
+                final String tjzt=evaluationList.get(position).getTjzt();
+                final String pjmbmcb_id=evaluationList.get(position).getPjmbmcb_id();
+                final String sfcjlrjs=evaluationList.get(position).getSfcjlrjs();
+                final String teacherName=evaluationList.get(position).getTeacher();
+                EvaluationInfoActivity.actionStart(context,jxb_id,kch_id,xsdm,jgh_id,tjzt,pjmbmcb_id,sfcjlrjs,teacherName);
             }
         });
         holder.nameTv.setText(evaluationList.get(position).getCourseName());
-        holder.typeTv.setText(evaluationList.get(position).getType());
-        holder.teacherTv.setText(evaluationList.get(position).getTeacher());
+        final String type="课程类型："+evaluationList.get(position).getType();
+        holder.typeTv.setText(type);
+        final String teacher="教师："+evaluationList.get(position).getTeacher();
+        holder.teacherTv.setText(teacher);
         if(position==evaluationList.size()-1){
             holder.divider.setVisibility(View.GONE);
         }else {

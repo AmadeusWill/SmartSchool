@@ -81,7 +81,7 @@ public class EvaluationActivity extends AppCompatActivity {
                         .data("time","0");
                 Connection.Response response =null;
                 try{
-                    response = connection.cookies(BaseActivity.Cookies).ignoreContentType(false).followRedirects(true).method(Connection.Method.POST).execute();
+                    response = connection.cookies(BaseActivity.Cookies).ignoreContentType(true).followRedirects(true).method(Connection.Method.POST).execute();
                 }    catch (IOException e){
                     e.printStackTrace();
                 }

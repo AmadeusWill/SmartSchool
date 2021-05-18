@@ -6,9 +6,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.smartschool.BaseActivity;
 import com.smartschool.R;
 
-public class CourseActivity extends AppCompatActivity {
+public class CourseActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

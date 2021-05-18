@@ -29,7 +29,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class EvaluationActivity extends AppCompatActivity {
+public class EvaluationActivity extends BaseActivity {
     List<EvaluationDataBean> evaluationList;
     Spinner sp;
     RecyclerView evaluationRecycler;

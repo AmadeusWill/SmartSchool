@@ -23,7 +23,7 @@ import org.jsoup.nodes.Element;
 
 import java.io.IOException;
 
-public class EvaluationInfoActivity extends AppCompatActivity {
+public class EvaluationInfoActivity extends BaseActivity {
     TextView courseTv;
     TextView teacherTv;
     ImageView imgTv;

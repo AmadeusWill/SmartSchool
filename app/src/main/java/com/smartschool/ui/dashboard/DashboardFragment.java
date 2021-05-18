@@ -99,12 +99,13 @@ public class DashboardFragment extends Fragment {
                 connection.header("User-Agent","Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.93 Safari/537.36 Edg/90.0.818.56");
                 Connection.Response response =null;
                 try{
-                    response = connection.cookies(BaseActivity.Cookies).ignoreContentType(false).followRedirects(true).execute();
+                    response = connection.cookies(BaseActivity.Cookies).ignoreContentType(true).followRedirects(true).method(Connection.Method.POST).execute();
                 }    catch (IOException e){
                     e.printStackTrace();
                 }
                 Document document=Jsoup.parse(response.body());
-                Elements elements=document.select("#xw-main .list-group a");
+                Elements elements=document.select(".list-group a");
+                System.out.println(response.body());
                 for(int i=0;i<elements.size()&&i<7;i++){
                     Element element=elements.get(i);
                     String title=element.attr("title");

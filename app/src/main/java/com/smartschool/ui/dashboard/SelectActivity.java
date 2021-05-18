@@ -12,8 +12,10 @@ import android.widget.Spinner;
 
 import com.smartschool.BaseActivity;
 import com.smartschool.R;
+import com.smartschool.adapter.CourseAdapter;
 import com.smartschool.adapter.GradeAdapter;
 import com.smartschool.adapter.TestAdapter;
+import com.smartschool.bean.CourseDataBean;
 import com.smartschool.bean.GradeDataBean;
 import com.smartschool.bean.TestDataBean;
 
@@ -31,6 +33,7 @@ import java.util.List;
 public class SelectActivity extends BaseActivity {
     List<TestDataBean> testList;
     List<GradeDataBean> gradeList;
+    List<CourseDataBean> courseList;
     String xnm;
     String xqm;
     Spinner spinner1;
@@ -65,6 +68,10 @@ public class SelectActivity extends BaseActivity {
                     case 1:
                         gradeList=new ArrayList<>();
                         initGradeInfo(xnm,xqm);
+                        break;
+                    case 2:
+                        courseList=new ArrayList<>();
+                        initCourseData(xnm,xqm);
                         break;
                     default:break;
                 }
@@ -177,6 +184,79 @@ public class SelectActivity extends BaseActivity {
                 LinearLayoutManager linearLayoutManager=new LinearLayoutManager(SelectActivity.this);
                 selectRecycler.setLayoutManager(linearLayoutManager);
                 selectRecycler.setAdapter(new GradeAdapter(SelectActivity.this,gradeList));
+            }
+        });
+    }
+
+    private void initCourseData(final String xnm,final String xqm){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Connection connection=Jsoup.connect("http://jwxt.cumt.edu.cn/jwglxt/kbcx/xskbcx_cxXsKb.html?gnmkdm=N253508&su="+userId);
+                connection.header("User-Agent","Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.85 Safari/537.36 Edg/90.0.818.49");
+                connection.header("Content-Type","application/x-www-form-urlencoded;charset=UTF-8");
+                connection.cookies(Cookies);
+                connection.data("xnm",xnm)
+                        .data("xqm",xqm)
+                        .data("kzlx","ck");
+                Connection.Response response=null;
+                try {
+                    response=connection.ignoreContentType(true).method(Connection.Method.POST).followRedirects(true).execute();
+                }catch (IOException e){
+                    e.printStackTrace();
+                }
+                try {
+                    JSONObject jsonObject=new JSONObject(response.body());
+                    JSONArray jsonArray1=jsonObject.getJSONArray("kbList");
+                    JSONArray jsonArray2=jsonObject.getJSONArray("sjkList");
+                    for(int i=0;i<jsonArray1.length();i++){
+                        jsonObject=jsonArray1.getJSONObject(i);
+                        CourseDataBean courseDataBean=new CourseDataBean();
+                        courseDataBean.setCourse(jsonObject.getString("kcmc"));
+                        courseDataBean.setJc(jsonObject.getString("jc"));
+                        courseDataBean.setZc(jsonObject.getString("zcd"));
+                        final String place=jsonObject.getString("xqmc")+" "+jsonObject.getString("cdmc");
+                        courseDataBean.setPlace(place);
+                        courseDataBean.setTeacher(jsonObject.getString("xm"));
+                        courseDataBean.setTestType(jsonObject.getString("khfsmc"));
+                        courseDataBean.setType(jsonObject.getString("kcxszc"));
+                        courseDataBean.setXf(jsonObject.getString("xf"));
+                        courseList.add(courseDataBean);
+                    }
+                    String content="";
+                    for(int i=0;i<jsonArray2.length();i++){
+                        jsonObject=jsonArray2.getJSONObject(i);
+                        content+=jsonObject.getString("sjkcgs");
+                    }
+                    CourseDataBean courseDataBean=new CourseDataBean();
+                    courseDataBean.setCourse(content);
+                    courseDataBean.setJc("");
+                    courseDataBean.setZc("");
+                    courseDataBean.setPlace("");
+                    courseDataBean.setTeacher("");
+                    courseDataBean.setTestType("");
+                    courseDataBean.setType("");
+                    courseDataBean.setXf("");
+                    if(content.length()>1){
+                        courseList.add(courseDataBean);
+                        initCourseRecycler(1);
+                    }else {
+                        initCourseRecycler(0);
+                    }
+                }catch (JSONException e){
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+    }
+
+    private void initCourseRecycler(int type){
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                LinearLayoutManager linearLayoutManager=new LinearLayoutManager(SelectActivity.this);
+                selectRecycler.setLayoutManager(linearLayoutManager);
+                selectRecycler.setAdapter(new CourseAdapter(SelectActivity.this,courseList,type));
             }
         });
     }

@@ -77,6 +77,10 @@ public class BtnAdapter extends RecyclerView.Adapter<BtnAdapter.ViewHolder>{
                             case 4:
                                 RoomActivity.actionStart(context);
                                 break;
+                            case 7:
+                                break;
+                            case 8:
+                                break;
                             default:break;
                         }
                     }else {

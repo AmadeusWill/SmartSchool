@@ -21,6 +21,7 @@ import com.smartschool.ui.dashboard.ImgActivity;
 import com.smartschool.ui.dashboard.MsgActivity;
 import com.smartschool.ui.dashboard.RoomActivity;
 import com.smartschool.ui.dashboard.SelectActivity;
+import com.smartschool.ui.notifications.NewsInfoActivity;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -81,6 +82,7 @@ public class BtnAdapter extends RecyclerView.Adapter<BtnAdapter.ViewHolder>{
                                 SelectActivity.actionStart(context,2);
                                 break;
                             case 8:
+                                NewsInfoActivity.actionStart(context,"http://yx.houqinbao.com/index.php?m=Wechat&c=Wechat&a=index&token=gh_8cbd49d3fd1d&openid=oUiRowS0zsDmGwLjfjnf1T2_n0TM");
                                 break;
                             default:break;
                         }

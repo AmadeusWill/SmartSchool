@@ -1,20 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".ui.home.HomeFragment">
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/btn_recycler"
+    <LinearLayout
+        android:layout_weight="1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="15dp"
-        android:layout_marginTop="30dp"/>
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/noti_recycler"
+        android:background="@android:color/holo_red_light"
+        android:layout_height="0dp">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/home_img"
+                android:layout_centerInParent="true"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/ic_drawer"/>
+        </RelativeLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_weight="2"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/btn_recycler"
-        android:layout_marginTop="20dp"/>
-</RelativeLayout>
+        android:background="#514F4F"
+        android:orientation="vertical"
+        android:layout_height="0dp">
+        <Button
+            android:id="@+id/home_person_btn"
+            android:textSize="25sp"
+            android:text="个人学籍信息"
+            android:paddingVertical="10dp"
+            android:layout_marginHorizontal="50dp"
+            android:layout_marginTop="25dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <Button
+            android:id="@+id/home_online_study_btn"
+            android:text="教育资源云平台"
+            android:textSize="25sp"
+            android:paddingVertical="10dp"
+            android:layout_marginHorizontal="50dp"
+            android:layout_marginTop="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <Button
+            android:id="@+id/home_more_btn"
+            android:text="校园服务"
+            android:textSize="25sp"
+            android:paddingVertical="10dp"
+            android:layout_marginHorizontal="50dp"
+            android:layout_marginTop="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+</LinearLayout>

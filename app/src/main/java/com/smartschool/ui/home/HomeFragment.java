@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -14,8 +15,9 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.smartschool.R;
 import com.smartschool.databinding.FragmentHomeBinding;
+import com.smartschool.ui.notifications.NewsInfoActivity;
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements View.OnClickListener{
 
 //    private HomeViewModel homeViewModel;
     private FragmentHomeBinding binding;
@@ -35,6 +37,14 @@ public class HomeFragment extends Fragment {
 //                textView.setText(s);
 //            }
 //        });
+
+        Button infoBtn=(Button) root.findViewById(R.id.home_person_btn);
+        Button studyBtn=(Button) root.findViewById(R.id.home_online_study_btn);
+        Button moreBtn=(Button) root.findViewById(R.id.home_more_btn);
+        infoBtn.setOnClickListener(this);
+        studyBtn.setOnClickListener(this);
+        moreBtn.setOnClickListener(this);
+
         return root;
     }
 
@@ -42,5 +52,20 @@ public class HomeFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.home_person_btn:
+                break;
+            case R.id.home_online_study_btn:
+                NewsInfoActivity.actionStart(getContext(),"http://cumt.fy.chaoxing.com/portal");
+                break;
+            case R.id.home_more_btn:
+                NewsInfoActivity.actionStart(getContext(),"http://yx.houqinbao.com/index.php?m=Wechat&c=Wechat&a=index&token=gh_8cbd49d3fd1d&openid=oUiRowS0zsDmGwLjfjnf1T2_n0TM");
+                break;
+            default:break;
+        }
     }
 }

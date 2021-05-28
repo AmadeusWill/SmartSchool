@@ -1,5 +1,6 @@
 package com.smartschool.ui.dashboard;
 
+import android.app.ProgressDialog;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -39,6 +40,7 @@ public class DashboardFragment extends Fragment {
     RecyclerView btnRecycler;
     RecyclerView notiRecycler;
     List<NewsDataBean> notiLsit;
+    ProgressDialog dialog;
 
     final int[] imgIds={R.drawable.ic_select_test,R.drawable.ic_select_point,R.drawable.ic_select_msg,R.drawable.ic_evaluation,R.drawable.ic_empty_room,R.drawable.ic_bus,R.drawable.ic_calendar,R.drawable.ic_course_form,R.drawable.ic_more};
     final String[] btnText={"考试查询","成绩查询","消息","教学评价","空闲教室","班车时刻表","校历","课程表","更多功能"};
@@ -65,6 +67,11 @@ public class DashboardFragment extends Fragment {
         notiRecycler=(RecyclerView) root.findViewById(R.id.noti_recycler);
         initBtnRecycler();
         if(LoginActivity.loginSuccess){
+            dialog=new ProgressDialog(getContext());
+            dialog.setTitle("请等待!");
+            dialog.setMessage("数据加载中…………");
+            dialog.setCancelable(false);
+            dialog.show();
             if(notiLsit==null||notiLsit.size()==0){
                 notiLsit=new ArrayList<>();
                 initNotiData();
@@ -129,6 +136,7 @@ public class DashboardFragment extends Fragment {
                 LinearLayoutManager linearLayoutManager=new LinearLayoutManager(getContext());
                 notiRecycler.setLayoutManager(linearLayoutManager);
                 notiRecycler.setAdapter(new NewsAdapter(getContext(),notiLsit,1));
+                dialog.dismiss();
             }
         });
     }

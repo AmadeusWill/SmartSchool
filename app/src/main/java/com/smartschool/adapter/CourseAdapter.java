@@ -56,12 +56,15 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder
                 holder.divider.setVisibility(View.VISIBLE);
                 holder.courseTv.setText(courseList.get(position).getCourse());
                 holder.xfTv.setText(courseList.get(position).getXf());
-                final String jczc="("+courseList.get(position).getJc()+")"+courseList.get(position).getZc();
+                final String jczc="上课时间："+"("+courseList.get(position).getJc()+")"+courseList.get(position).getZc();
                 holder.jczcTv.setText(jczc);
                 holder.placeTv.setText(courseList.get(position).getPlace());
-                holder.teacherTv.setText(courseList.get(position).getTeacher());
-                holder.testTypeTv.setText(courseList.get(position).getTestType());
-                holder.typeTv.setText(courseList.get(position).getType());
+                String teacher="任课教师："+courseList.get(position).getTeacher();
+                holder.teacherTv.setText(teacher);
+                String testType="考核方式："+courseList.get(position).getTestType();
+                holder.testTypeTv.setText(testType);
+                String type="学分组成："+courseList.get(position).getType();
+                holder.typeTv.setText(type);
             }else {
                 holder.divider.setVisibility(View.GONE);
                 holder.courseTv.setText(courseList.get(position).getCourse());

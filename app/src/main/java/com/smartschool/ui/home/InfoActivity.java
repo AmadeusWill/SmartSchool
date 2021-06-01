@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
+import com.smartschool.R;
+
 public class InfoActivity extends AppCompatActivity {
 
     @Override

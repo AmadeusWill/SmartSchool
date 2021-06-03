@@ -1,5 +1,6 @@
 package com.smartschool.ui.notifications;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -42,10 +43,11 @@ public class NewsActivity extends BaseActivity {
         View view=(View) findViewById(R.id.tb);
         Toolbar toolbar=(Toolbar) view.findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        ActionBar actionBar=getSupportActionBar();
         if(type==0){
-            toolbar.setTitle("视点新闻");
+            actionBar.setTitle("视点新闻");
         }else {
-            toolbar.setTitle("学术聚焦");
+            actionBar.setTitle("学术聚焦");
         }
         toolbar.setFitsSystemWindows(true);
         toolbar.setNavigationIcon(R.drawable.ic_back);

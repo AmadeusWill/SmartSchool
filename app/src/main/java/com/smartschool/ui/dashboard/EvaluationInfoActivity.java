@@ -49,6 +49,7 @@ public class EvaluationInfoActivity extends BaseActivity {
             }
         });
         ActionBar actionBar=getSupportActionBar();
+        actionBar.setTitle("教学评价信息");
 
         courseTv=(TextView) findViewById(R.id.evaluation_info_course);
         teacherTv=(TextView) findViewById(R.id.evaluation_info_teacher);

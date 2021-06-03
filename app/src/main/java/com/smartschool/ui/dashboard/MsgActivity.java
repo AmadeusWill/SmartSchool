@@ -51,6 +51,7 @@ public class MsgActivity extends BaseActivity {
             }
         });
         ActionBar actionBar=getSupportActionBar();
+        actionBar.setTitle("个人信息");
 
         msgRecycler=(RecyclerView) findViewById(R.id.msg_recycler);
         initMsgData();

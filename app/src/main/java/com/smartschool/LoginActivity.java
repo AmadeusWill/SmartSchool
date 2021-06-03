@@ -83,6 +83,7 @@ public class LoginActivity extends BaseActivity {
             }
         });
         ActionBar actionBar=getSupportActionBar();
+        actionBar.setTitle("用户登录");
 //        actionBar.setDisplayHomeAsUpEnabled(true);
 
         initImg();

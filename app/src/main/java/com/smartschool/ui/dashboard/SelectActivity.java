@@ -1,5 +1,7 @@
 package com.smartschool.ui.dashboard;
 
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -45,6 +47,18 @@ public class SelectActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select);
 
+        Toolbar toolbar=(Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        toolbar.setFitsSystemWindows(true);
+        toolbar.setNavigationIcon(R.drawable.ic_back);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+        ActionBar actionBar=getSupportActionBar();
+
         int type=getIntent().getIntExtra("type",0);
         selectRecycler=(RecyclerView) findViewById(R.id.select_recycler);
         Button selectBtn=(Button) findViewById(R.id.btn_select);
@@ -62,14 +76,17 @@ public class SelectActivity extends BaseActivity {
                 }
                 switch (type){
                     case 0:
+                        actionBar.setTitle("考试信息查询");
                         testList=new ArrayList<>();
                         initTestInfo(xnm,xqm);
                         break;
                     case 1:
+                        actionBar.setTitle("课程成绩查询");
                         gradeList=new ArrayList<>();
                         initGradeInfo(xnm,xqm);
                         break;
                     case 2:
+                        actionBar.setTitle("课程表查询");
                         courseList=new ArrayList<>();
                         initCourseData(xnm,xqm);
                         break;

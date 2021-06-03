@@ -54,6 +54,7 @@ public class RoomActivity extends BaseActivity {
             }
         });
         ActionBar actionBar=getSupportActionBar();
+        actionBar.setTitle("空闲教室查询");
 
         spArea=(Spinner) findViewById(R.id.sp_area);
         spWeek=(Spinner) findViewById(R.id.sp_week);

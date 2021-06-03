@@ -60,6 +60,7 @@ public class MainActivity extends BaseActivity {
             }
         });
         ActionBar actionBar=getSupportActionBar();
+        actionBar.setTitle("智慧校园");
 //        actionBar.setDisplayHomeAsUpEnabled(true);
 
         BottomNavigationView navView = findViewById(R.id.nav_view);

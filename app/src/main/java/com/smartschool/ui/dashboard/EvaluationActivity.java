@@ -51,6 +51,7 @@ public class EvaluationActivity extends BaseActivity {
             }
         });
         ActionBar actionBar=getSupportActionBar();
+        actionBar.setTitle("教学评价");
 
         evaluationRecycler=(RecyclerView) findViewById(R.id.evaluation_recycler);
 

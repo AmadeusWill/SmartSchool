@@ -51,9 +51,11 @@ public class ImgActivity extends BaseActivity {
 
         imageView=(ImageView) findViewById(R.id.img_iv);
         if(type==0){
+            actionBar.setTitle("校园班车");
             imageView.setImageResource(R.mipmap.bus);
 //            Glide.with(this).load(R.mipmap.bus).into(imageView);
         }else {
+            actionBar.setTitle("校历");
             imageView.setImageResource(R.mipmap.calendar);
 //            Glide.with(this).load(R.mipmap.calendar).into(imageView);
         }

@@ -50,13 +50,19 @@ public class BtnAdapter extends RecyclerView.Adapter<BtnAdapter.ViewHolder>{
         holder.btnView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(position==5||position==6){
+                if(position==5||position==6||position==8||position==9){
                     switch (position){
                         case 5:
                             ImgActivity.actionStart(context,0);
                             break;
                         case 6:
                             ImgActivity.actionStart(context,1);
+                            break;
+                        case 8:
+                            NewsInfoActivity.actionStart(context,"http://www.houqinbao.com/hydropower/index.php?m=PayWeChat&c=Index&a=before&openid=oUiRowS0zsDmGwLjfjnf1T2_n0TM&schoolcode=13579&campusid=13579_173&areaid=13579_173_292&flatid=13579_173_292_965&roomname=A6091");
+                            break;
+                        case 9:
+                            NewsInfoActivity.actionStart(context,"http://yx.houqinbao.com/index.php?m=Wechat&c=Wechat&a=index&token=gh_8cbd49d3fd1d&openid=oUiRowS0zsDmGwLjfjnf1T2_n0TM");
                             break;
                         default:break;
                     }
@@ -80,9 +86,6 @@ public class BtnAdapter extends RecyclerView.Adapter<BtnAdapter.ViewHolder>{
                                 break;
                             case 7:
                                 SelectActivity.actionStart(context,2);
-                                break;
-                            case 8:
-                                NewsInfoActivity.actionStart(context,"http://yx.houqinbao.com/index.php?m=Wechat&c=Wechat&a=index&token=gh_8cbd49d3fd1d&openid=oUiRowS0zsDmGwLjfjnf1T2_n0TM");
                                 break;
                             default:break;
                         }

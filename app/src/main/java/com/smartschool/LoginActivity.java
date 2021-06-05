@@ -92,48 +92,62 @@ public class LoginActivity extends BaseActivity {
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                initWaiting();
                 final String name=nameEt.getText().toString();
                 final String pwd=pwdEt.getText().toString();
                 final String code=codeEt.getText().toString();
-                userId=name;
-
-                final String loginUrl=baseUrl+"getCookies?"
-                        +"username="+name
-                        +"&password="+pwd
-                        +"&code="+code;
-
-                HttpUtil.sendOkHttpRequest(loginUrl, new Callback() {
-                    @Override
-                    public void onFailure(Call call, IOException e) {
-                        waitingDialog.dismiss();
-                        if(e instanceof SocketTimeoutException){
-                            initDialog("连接超时，请重试！");
-                        } else if(e instanceof ConnectException){
-                            initDialog("连接出错，请检查网络并重试！");
-                        }else {
-                            initDialog("失败，请重试！");
+                if(name.length()*pwd.length()*code.length()<=0)
+                {
+                    final android.app.AlertDialog.Builder builder=new android.app.AlertDialog.Builder(LoginActivity.this);
+                    builder.setTitle("请重新输入");
+                    builder.setMessage("登陆信息不能为空！");
+                    builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
                         }
-                    }
+                    });
+                    builder.create().show();
+                }else {
+                    userId=name;
+                    initWaiting();
 
-                    @Override
-                    public void onResponse(Call call, Response response) throws IOException {
-                        try {
-                            JSONObject jsonObject=new JSONObject(response.body().string());
-                            JSONArray jsonArray=jsonObject.getJSONArray("rows");
-                            Cookies=new HashMap<>();
-                            for(int i=0;i<jsonArray.length();i++){
-                                jsonObject=jsonArray.getJSONObject(i);
-                                final String key=jsonObject.getString("key");
-                                final String value=jsonObject.getString("value");
-                                Cookies.put(key,value);
+                    final String loginUrl=baseUrl+"getCookies?"
+                            +"username="+name
+                            +"&password="+pwd
+                            +"&code="+code;
+
+                    HttpUtil.sendOkHttpRequest(loginUrl, new Callback() {
+                        @Override
+                        public void onFailure(Call call, IOException e) {
+                            waitingDialog.dismiss();
+                            if(e instanceof SocketTimeoutException){
+                                initDialog("连接超时，请重试！");
+                            } else if(e instanceof ConnectException){
+                                initDialog("连接出错，请检查网络并重试！");
+                            }else {
+                                initDialog("失败，请重试！");
                             }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
                         }
-                        initStandardInfo();
-                    }
-                });
+
+                        @Override
+                        public void onResponse(Call call, Response response) throws IOException {
+                            try {
+                                JSONObject jsonObject=new JSONObject(response.body().string());
+                                JSONArray jsonArray=jsonObject.getJSONArray("rows");
+                                Cookies=new HashMap<>();
+                                for(int i=0;i<jsonArray.length();i++){
+                                    jsonObject=jsonArray.getJSONObject(i);
+                                    final String key=jsonObject.getString("key");
+                                    final String value=jsonObject.getString("value");
+                                    Cookies.put(key,value);
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                            initStandardInfo();
+                        }
+                    });
+                }
             }
         });
     }

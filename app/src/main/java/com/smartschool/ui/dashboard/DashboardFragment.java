@@ -42,8 +42,8 @@ public class DashboardFragment extends Fragment {
     List<NewsDataBean> notiLsit;
     ProgressDialog dialog;
 
-    final int[] imgIds={R.drawable.ic_select_test,R.drawable.ic_select_point,R.drawable.ic_select_msg,R.drawable.ic_evaluation,R.drawable.ic_empty_room,R.drawable.ic_bus,R.drawable.ic_calendar,R.drawable.ic_course_form,R.drawable.ic_more};
-    final String[] btnText={"考试查询","成绩查询","消息","教学评价","空闲教室","班车时刻表","校历","课程表","更多功能"};
+    final int[] imgIds={R.drawable.ic_select_test,R.drawable.ic_select_point,R.drawable.ic_select_msg,R.drawable.ic_evaluation,R.drawable.ic_empty_room,R.drawable.ic_bus,R.drawable.ic_calendar,R.drawable.ic_course_form,R.drawable.ic_ele,R.drawable.ic_more};
+    final String[] btnText={"考试查询","成绩查询","消息","教学评价","空闲教室","班车时刻表","校历","课程表","电量查询","更多功能"};
 
 //    private DashboardViewModel dashboardViewModel;
     private FragmentDashboardBinding binding;

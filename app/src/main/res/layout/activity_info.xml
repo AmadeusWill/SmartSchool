@@ -6,6 +6,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".ui.home.InfoActivity">
+    <include layout="@layout/toolbar_layout"
+        android:id="@+id/tb"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -22,15 +24,72 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical|start"/>
             <TextView
-                android:id="@+id/person_name_tv"
+                android:id="@+id/person_base_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="22sp"
                 android:layout_gravity="center_vertical"/>
         </LinearLayout>
         <TextView
+            android:id="@+id/xh_tv"
             android:paddingHorizontal="30dp"
-            android:paddingTop="10dp"
+            android:paddingTop="20dp"
+            android:textSize="20sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start"/>
+        <TextView
+            android:id="@+id/xm_xmpy_tv"
+            android:paddingHorizontal="30dp"
+            android:paddingTop="20dp"
+            android:textSize="20sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start"/>
+        <TextView
+            android:id="@+id/sfz_tv"
+            android:paddingHorizontal="30dp"
+            android:paddingTop="20dp"
+            android:textSize="20sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start"/>
+        <TextView
+            android:id="@+id/sfzlx_tv"
+            android:paddingHorizontal="30dp"
+            android:paddingTop="20dp"
+            android:textSize="20sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start"/>
+        <TextView
+            android:id="@+id/csrq_mz_tv"
+            android:paddingHorizontal="30dp"
+            android:paddingTop="20dp"
+            android:textSize="20sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start"/>
+        <TextView
+            android:id="@+id/zzmm_tv"
+            android:paddingHorizontal="30dp"
+            android:paddingTop="20dp"
+            android:textSize="20sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start"/>
+        <TextView
+            android:id="@+id/rxrq_xslx_tv"
+            android:paddingHorizontal="30dp"
+            android:paddingTop="20dp"
+            android:textSize="20sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start"/>
+        <TextView
+            android:id="@+id/jg_tv"
+            android:paddingHorizontal="30dp"
+            android:paddingTop="20dp"
             android:textSize="20sp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

@@ -7,6 +7,7 @@ import androidx.appcompat.widget.Toolbar;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -15,6 +16,7 @@ import com.smartschool.BaseActivity;
 import com.smartschool.R;
 
 public class NewsInfoActivity extends BaseActivity {
+    WebView webView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +24,7 @@ public class NewsInfoActivity extends BaseActivity {
         setContentView(R.layout.activity_news_info);
 
         final String url=getIntent().getStringExtra("url");
+        webView=(WebView) findViewById(R.id.news_wv);
 
         View view=(View) findViewById(R.id.tb);
         Toolbar toolbar=(Toolbar) view.findViewById(R.id.toolbar);
@@ -31,13 +34,17 @@ public class NewsInfoActivity extends BaseActivity {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                if(webView.canGoBack()){
+                    webView.goBack();
+                }else {
+                    finish();
+                }
             }
         });
         ActionBar actionBar=getSupportActionBar();
         actionBar.setTitle("功能详情");
 
-        WebView webView=(WebView) findViewById(R.id.news_wv);
+
         webView.loadUrl(url);
         webView.setWebViewClient(new WebViewClient());
         webView.getSettings().setJavaScriptEnabled(true);
@@ -45,6 +52,14 @@ public class NewsInfoActivity extends BaseActivity {
         webView.getSettings().setBuiltInZoomControls(true);
         webView.getSettings().setUseWideViewPort(true);
         webView.setInitialScale(70);
+    }
+
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(keyCode==KeyEvent.KEYCODE_BACK&&webView.canGoBack()){
+            webView.goBack();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 
     public static void actionStart(Context context,String url){

@@ -7,6 +7,7 @@ import androidx.appcompat.widget.Toolbar;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -14,11 +15,14 @@ import android.webkit.WebViewClient;
 import com.smartschool.R;
 
 public class StudyActivity extends AppCompatActivity {
+    WebView webView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_news_info);
+
+        webView=(WebView) findViewById(R.id.news_wv);
 
         View view=(View) findViewById(R.id.tb);
         Toolbar toolbar=(Toolbar) view.findViewById(R.id.toolbar);
@@ -28,14 +32,18 @@ public class StudyActivity extends AppCompatActivity {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                if(webView.canGoBack()){
+                    webView.goBack();
+                }else {
+                    finish();
+                }
             }
         });
         ActionBar actionBar=getSupportActionBar();
         actionBar.setTitle("在线教育");
 
         final String url=getIntent().getStringExtra("url");
-        WebView webView=(WebView) findViewById(R.id.news_wv);
+
         webView.loadUrl(url);
         webView.setWebViewClient(new WebViewClient());
         webView.getSettings().setJavaScriptEnabled(true);
@@ -45,7 +53,16 @@ public class StudyActivity extends AppCompatActivity {
         webView.setInitialScale(85);
     }
 
-    public static void actionStart(Context context,String url){
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(keyCode==KeyEvent.KEYCODE_BACK&&webView.canGoBack()){
+            webView.goBack();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
+    public static void actionStart(Context context, String url){
         Intent intent=new Intent(context,StudyActivity.class);
         intent.putExtra("url",url);
         context.startActivity(intent);

@@ -14,7 +14,8 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/noti_recycler"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_below="@id/btn_recycler"
         android:layout_marginTop="20dp"/>
+<!--     修改过宽度-->
 </RelativeLayout>

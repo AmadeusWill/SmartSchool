@@ -238,6 +238,7 @@ public class SelectActivity extends BaseActivity {
                         courseDataBean.setTestType(jsonObject.getString("khfsmc"));
                         courseDataBean.setType(jsonObject.getString("kcxszc"));
                         courseDataBean.setXf(jsonObject.getString("xf"));
+                        courseDataBean.setXqj(jsonObject.getString("xqjmc"));
                         courseList.add(courseDataBean);
                     }
                     String content="";

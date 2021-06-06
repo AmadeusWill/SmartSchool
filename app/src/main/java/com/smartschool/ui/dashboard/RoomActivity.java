@@ -71,7 +71,7 @@ public class RoomActivity extends BaseActivity {
                 String zcd=Integer.toString((int)Math.pow(2,spWeek.getSelectedItemPosition()));
                 String xqj=Integer.toString(spDay.getSelectedItemPosition()+1);
                 String jcd=Integer.toString((int)Math.pow(2,spJC.getSelectedItemPosition()));
-                if(spWeek.getSelectedItemPosition()>=10&&spWeek.getSelectedItemPosition()+spDay.getSelectedItemPosition()>=16){
+                if(spWeek.getSelectedItemPosition()>13||spWeek.getSelectedItemPosition()+spDay.getSelectedItemPosition()>=14){
                     initRoomData(xqh_id,xnm,xqm,zcd,xqj,jcd);
                 }
             }

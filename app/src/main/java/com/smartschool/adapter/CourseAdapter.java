@@ -65,6 +65,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder
                 holder.testTypeTv.setText(testType);
                 String type="学分组成："+courseList.get(position).getType();
                 holder.typeTv.setText(type);
+                holder.xqTv.setText(courseList.get(position).getXqj());
             }else {
                 holder.divider.setVisibility(View.GONE);
                 holder.courseTv.setText(courseList.get(position).getCourse());
@@ -85,6 +86,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder
         TextView teacherTv;
         TextView testTypeTv;
         TextView typeTv;
+        TextView xqTv;
         View divider;
         public ViewHolder(@NonNull @NotNull View itemView) {
             super(itemView);
@@ -96,6 +98,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder
             testTypeTv=(TextView) itemView.findViewById(R.id.course_testType);
             typeTv=(TextView) itemView.findViewById(R.id.course_type);
             divider=(View) itemView.findViewById(R.id.divider);
+            xqTv=(TextView) itemView.findViewById(R.id.course_xqj);
         }
     }
 }

@@ -1,6 +1,6 @@
 package com.smartschool.bean;
 
-public class CourseDataBean {
+public class CourseInfoDataBean {
     String course;
     String jc;
     String zc;
